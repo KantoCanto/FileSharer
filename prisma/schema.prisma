@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String     @id @default(cuid())
+  clerkUserId String     @unique
+  email       String     @unique
+  role        Role       @default(USER)
+  status      UserStatus @default(ACTIVE)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  files       File[]
+  shares      Share[]
+}
+
+model File {
+  id           String     @id @default(cuid())
+  ownerId      String
+  owner        User       @relation(fields: [ownerId], references: [id])
+  originalName String
+  relativePath  String?
+  safeName     String
+  storageKey   String     @unique
+  sizeBytes    BigInt
+  mimeType     String?
+  status       FileStatus @default(PENDING)
+  createdAt    DateTime   @default(now())
+  uploadedAt   DateTime?
+  expiresAt    DateTime
+  deletedAt    DateTime?
+  downloads    Download[]
+  shares       ShareFile[]
+
+  @@index([ownerId])
+  @@index([status, expiresAt])
+}
+
+model Download {
+  id        String   @id @default(cuid())
+  fileId    String
+  file      File     @relation(fields: [fileId], references: [id])
+  userId    String?
+  createdAt DateTime @default(now())
+
+  @@index([fileId])
+}
+
+model AdminAction {
+  id        String   @id @default(cuid())
+  adminId   String
+  action    String
+  details   Json?
+  createdAt DateTime @default(now())
+}
+
+model Share {
+  id           String      @id @default(cuid())
+  ownerId      String
+  owner        User        @relation(fields: [ownerId], references: [id])
+  title        String
+  passwordHash String
+  expiresAt    DateTime
+  createdAt    DateTime    @default(now())
+  revokedAt    DateTime?
+  files        ShareFile[]
+
+  @@index([ownerId])
+  @@index([expiresAt])
+}
+
+model ShareFile {
+  shareId String
+  fileId  String
+  share   Share  @relation(fields: [shareId], references: [id], onDelete: Cascade)
+  file    File   @relation(fields: [fileId], references: [id], onDelete: Cascade)
+
+  @@id([shareId, fileId])
+  @@index([fileId])
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum UserStatus {
+  ACTIVE
+  DISABLED
+}
+
+enum FileStatus {
+  PENDING
+  AVAILABLE
+  DELETED
+  EXPIRED
+  FAILED
+}
