@@ -18,32 +18,32 @@ export default async function AdminStoragePage() {
       </div>
 
       <section className="grid gap-4 md:grid-cols-3">
-        <div className="rounded-lg border border-line bg-white p-5">
+        <div className="surface rounded-lg bg-sky/35 p-5">
           <p className="text-sm text-ink/60">Active storage</p>
           <p className="mt-2 text-2xl font-semibold">{formatBytes(usage.bytes)}</p>
-          <div className="mt-4 h-2 rounded-full bg-line">
+          <div className="mt-4 h-2 rounded-full bg-white/70">
             <div className="h-2 rounded-full bg-moss" style={{ width: `${usedPercent}%` }} />
           </div>
         </div>
-        <div className="rounded-lg border border-line bg-white p-5">
+        <div className="surface rounded-lg bg-mint/35 p-5">
           <p className="text-sm text-ink/60">Free-tier cap</p>
           <p className="mt-2 text-2xl font-semibold">
             {formatBytes(limits.maxTotalActiveStorageBytes)}
           </p>
         </div>
-        <div className="rounded-lg border border-line bg-white p-5">
+        <div className="surface rounded-lg bg-lilac/35 p-5">
           <p className="text-sm text-ink/60">Active files</p>
           <p className="mt-2 text-2xl font-semibold">{usage.count}</p>
         </div>
       </section>
 
-      <section className="overflow-hidden rounded-lg border border-line bg-white">
-        <div className="border-b border-line px-4 py-3">
+      <section className="surface overflow-hidden rounded-lg">
+        <div className="border-b border-line bg-peach/35 px-4 py-3">
           <h2 className="font-semibold">Per-user usage</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full min-w-[640px] text-left text-sm">
-            <thead className="bg-paper text-ink/70">
+            <thead className="bg-peach/45 text-ink/70">
               <tr>
                 <th className="px-4 py-3 font-medium">User</th>
                 <th className="px-4 py-3 font-medium">Role</th>

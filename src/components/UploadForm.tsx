@@ -92,11 +92,11 @@ export function UploadForm({ usage }: { usage: Usage }) {
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
-      <section className="rounded-lg border border-line bg-white p-5">
+      <section className="surface rounded-lg p-5">
         <label className="block">
           <span className="text-sm font-medium">Select files or folder</span>
           <input
-            className="mt-3 block w-full rounded-md border border-line bg-paper p-3"
+            className="mt-3 block w-full rounded-md border border-line bg-white/75 p-3"
             type="file"
             multiple
             disabled={busy}
@@ -106,7 +106,7 @@ export function UploadForm({ usage }: { usage: Usage }) {
         <label className="mt-4 block">
           <span className="text-sm font-medium">Select folder</span>
           <input
-            className="mt-3 block w-full rounded-md border border-line bg-paper p-3"
+            className="mt-3 block w-full rounded-md border border-line bg-white/75 p-3"
             type="file"
             multiple
             // React does not type this Chromium directory-picker attribute.
@@ -117,7 +117,7 @@ export function UploadForm({ usage }: { usage: Usage }) {
         </label>
 
         {files.length > 0 ? (
-          <div className="mt-5 rounded-md border border-line bg-paper p-4">
+          <div className="mt-5 rounded-md border border-line bg-sky/35 p-4">
             <p className="font-medium">
               {files.length} item{files.length === 1 ? '' : 's'} selected
             </p>
@@ -132,14 +132,14 @@ export function UploadForm({ usage }: { usage: Usage }) {
           </div>
         ) : null}
 
-        <div className="mt-5 h-3 rounded-full bg-line">
+        <div className="mt-5 h-3 rounded-full bg-lilac">
           <div className="h-3 rounded-full bg-moss" style={{ width: `${progress}%` }} />
         </div>
 
         {status ? <p className="mt-3 text-sm text-ink/70">{status}</p> : null}
 
         <button
-          className="focus-ring mt-5 rounded-md bg-ink px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-ink/40"
+          className="focus-ring primary-action mt-5 rounded-md px-4 py-2 disabled:cursor-not-allowed disabled:bg-ink/40"
           disabled={files.length === 0 || busy || selectedTooLarge || wouldExceedCap}
           onClick={upload}
         >
@@ -147,10 +147,10 @@ export function UploadForm({ usage }: { usage: Usage }) {
         </button>
       </section>
 
-      <aside className="rounded-lg border border-line bg-white p-5">
+      <aside className="surface rounded-lg bg-mint/35 p-5">
         <p className="text-sm text-ink/60">Global storage used</p>
         <p className="mt-2 text-2xl font-semibold">{formatBytes(usage.usedBytes)}</p>
-        <div className="mt-4 h-2 rounded-full bg-line">
+        <div className="mt-4 h-2 rounded-full bg-white/70">
           <div className="h-2 rounded-full bg-moss" style={{ width: `${usedPercent}%` }} />
         </div>
         <dl className="mt-5 space-y-3 text-sm">

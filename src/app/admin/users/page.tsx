@@ -11,9 +11,9 @@ export default async function AdminUsersPage() {
         <p className="text-sm font-medium text-moss">Admin</p>
         <h1 className="mt-2 text-3xl font-semibold">Users</h1>
       </div>
-      <section className="overflow-hidden rounded-lg border border-line bg-white">
+      <section className="surface overflow-hidden rounded-lg">
         <table className="w-full min-w-[640px] text-left text-sm">
-          <thead className="bg-paper text-ink/70">
+          <thead className="bg-lilac/45 text-ink/70">
             <tr>
               <th className="px-4 py-3 font-medium">Email</th>
               <th className="px-4 py-3 font-medium">Role</th>

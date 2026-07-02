@@ -63,11 +63,11 @@ export function PublicShareClient({ shareId }: { shareId: string }) {
       </div>
 
       {!unlocked ? (
-        <section className="rounded-lg border border-line bg-white p-5">
+        <section className="surface rounded-lg p-5">
           <label className="block text-sm font-medium">
             Password
             <input
-              className="focus-ring mt-2 w-full rounded-md border border-line bg-paper p-3"
+              className="focus-ring mt-2 w-full rounded-md border border-line bg-white/80 p-3"
               type="password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
@@ -77,16 +77,16 @@ export function PublicShareClient({ shareId }: { shareId: string }) {
             />
           </label>
           <button
-            className="focus-ring mt-4 rounded-md bg-ink px-4 py-2 text-white"
+            className="focus-ring primary-action mt-4 rounded-md px-4 py-2"
             onClick={unlock}
           >
             Open share
           </button>
         </section>
       ) : (
-        <section className="overflow-hidden rounded-lg border border-line bg-white">
+        <section className="surface overflow-hidden rounded-lg">
           <table className="w-full text-left text-sm">
-            <thead className="bg-paper text-ink/70">
+            <thead className="bg-lilac/45 text-ink/70">
               <tr>
                 <th className="px-4 py-3 font-medium">File</th>
                 <th className="px-4 py-3 font-medium">Size</th>
@@ -105,7 +105,7 @@ export function PublicShareClient({ shareId }: { shareId: string }) {
                   <td className="px-4 py-3">{formatBytes(file.sizeBytes)}</td>
                   <td className="px-4 py-3">
                     <button
-                      className="focus-ring rounded-md border border-line px-3 py-1"
+                      className="focus-ring secondary-action rounded-md px-3 py-1"
                       onClick={() => download(file.id)}
                     >
                       Download

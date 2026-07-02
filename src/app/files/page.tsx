@@ -45,13 +45,13 @@ export default async function FilesPage({
         {user.role === Role.ADMIN ? (
           <div className="flex gap-2 text-sm">
             <a
-              className="focus-ring rounded-md border border-line bg-white px-3 py-2"
+              className="focus-ring secondary-action rounded-md px-3 py-2"
               href="/files"
             >
               Mine
             </a>
             <a
-              className="focus-ring rounded-md border border-line bg-white px-3 py-2"
+              className="focus-ring secondary-action rounded-md px-3 py-2"
               href="/files?scope=all"
             >
               All

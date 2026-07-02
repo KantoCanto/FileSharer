@@ -22,35 +22,35 @@ export default async function DashboardPage() {
       </section>
 
       <section className="grid gap-4 md:grid-cols-3">
-        <div className="rounded-lg border border-line bg-white p-5">
+        <div className="surface rounded-lg bg-sky/35 p-5">
           <p className="text-sm text-ink/60">Active storage</p>
           <p className="mt-2 text-2xl font-semibold">{formatBytes(usage.bytes)}</p>
-          <div className="mt-4 h-2 rounded-full bg-line">
+          <div className="mt-4 h-2 rounded-full bg-white/70">
             <div className="h-2 rounded-full bg-moss" style={{ width: `${usedPercent}%` }} />
           </div>
         </div>
-        <div className="rounded-lg border border-line bg-white p-5">
+        <div className="surface rounded-lg bg-mint/35 p-5">
           <p className="text-sm text-ink/60">Storage cap</p>
           <p className="mt-2 text-2xl font-semibold">
             {formatBytes(limits.maxTotalActiveStorageBytes)}
           </p>
         </div>
-        <div className="rounded-lg border border-line bg-white p-5">
+        <div className="surface rounded-lg bg-lilac/35 p-5">
           <p className="text-sm text-ink/60">Your role</p>
           <p className="mt-2 text-2xl font-semibold">{user.role.toLowerCase()}</p>
         </div>
       </section>
 
       <section className="flex flex-wrap gap-3">
-        <Link className="focus-ring rounded-md bg-ink px-4 py-2 text-white" href="/upload">
+        <Link className="focus-ring primary-action rounded-md px-4 py-2" href="/upload">
           Upload file
         </Link>
-        <Link className="focus-ring rounded-md border border-line bg-white px-4 py-2" href="/files">
+        <Link className="focus-ring secondary-action rounded-md px-4 py-2" href="/files">
           View files
         </Link>
         {user.role === 'ADMIN' ? (
           <Link
-            className="focus-ring rounded-md border border-line bg-white px-4 py-2"
+            className="focus-ring secondary-action rounded-md px-4 py-2"
             href="/admin/storage"
           >
             Storage admin

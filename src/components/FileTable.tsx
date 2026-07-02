@@ -80,14 +80,14 @@ export function FileTable({ files }: { files: FileListItem[] }) {
   }
 
   return (
-    <div className="overflow-hidden rounded-lg border border-line bg-white">
+    <div className="surface overflow-hidden rounded-lg">
       {message ? <p className="border-b border-line px-4 py-3 text-sm text-rust">{message}</p> : null}
-      <div className="border-b border-line bg-paper px-4 py-3">
+      <div className="border-b border-line bg-sky/35 px-4 py-3">
         <div className="flex flex-wrap items-end gap-3">
           <label className="text-sm">
             <span className="block font-medium">Share password</span>
             <input
-              className="focus-ring mt-1 rounded-md border border-line bg-white px-3 py-2"
+              className="focus-ring mt-1 rounded-md border border-line bg-white/80 px-3 py-2"
               type="password"
               value={sharePassword}
               onChange={(event) => setSharePassword(event.target.value)}
@@ -95,7 +95,7 @@ export function FileTable({ files }: { files: FileListItem[] }) {
             />
           </label>
           <button
-            className="focus-ring rounded-md bg-ink px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-ink/40"
+            className="focus-ring primary-action rounded-md px-4 py-2 disabled:cursor-not-allowed disabled:bg-ink/40"
             disabled={selectedIds.length === 0 || sharePassword.length < 8}
             onClick={createShare}
           >
@@ -103,7 +103,7 @@ export function FileTable({ files }: { files: FileListItem[] }) {
           </button>
           {shareUrl ? (
             <input
-              className="focus-ring min-w-[280px] flex-1 rounded-md border border-line bg-white px-3 py-2 text-sm"
+              className="focus-ring min-w-[280px] flex-1 rounded-md border border-line bg-white/80 px-3 py-2 text-sm"
               readOnly
               value={shareUrl}
               onFocus={(event) => event.currentTarget.select()}
@@ -113,7 +113,7 @@ export function FileTable({ files }: { files: FileListItem[] }) {
       </div>
       <div className="overflow-x-auto">
         <table className="w-full min-w-[760px] text-left text-sm">
-          <thead className="border-b border-line bg-paper text-ink/70">
+          <thead className="border-b border-line bg-peach/45 text-ink/70">
             <tr>
               <th className="px-4 py-3 font-medium">Share</th>
               <th className="px-4 py-3 font-medium">File</th>
@@ -149,14 +149,14 @@ export function FileTable({ files }: { files: FileListItem[] }) {
                 <td className="px-4 py-3">
                   <div className="flex gap-2">
                     <button
-                      className="focus-ring rounded-md border border-line px-3 py-1 disabled:opacity-50"
+                      className="focus-ring secondary-action rounded-md px-3 py-1 disabled:opacity-50"
                       disabled={file.status !== 'AVAILABLE'}
                       onClick={() => download(file.id)}
                     >
                       Download
                     </button>
                     <button
-                      className="focus-ring rounded-md border border-line px-3 py-1 text-rust"
+                      className="focus-ring secondary-action rounded-md px-3 py-1 text-rust"
                       onClick={() => remove(file.id)}
                     >
                       Delete
