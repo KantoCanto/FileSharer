@@ -61,6 +61,10 @@ export function jsonError(error: unknown) {
     return Response.json({ error: error.message }, { status: error.status })
   }
 
-  const message = error instanceof Error ? error.message : 'Unexpected error.'
-  return Response.json({ error: message }, { status: 400 })
+  if (process.env.NODE_ENV !== 'production') {
+    const message = error instanceof Error ? error.message : 'Unexpected error.'
+    return Response.json({ error: message }, { status: 400 })
+  }
+
+  return Response.json({ error: 'Unexpected error.' }, { status: 400 })
 }

@@ -10,7 +10,7 @@ function numberEnv(name: string, fallback: number) {
 export const limits = {
   maxTotalActiveStorageBytes: numberEnv('MAX_TOTAL_ACTIVE_STORAGE_BYTES', 15 * gib),
   softStorageLimitBytes: numberEnv('SOFT_STORAGE_LIMIT_BYTES', 14 * gib),
-  maxFileSizeBytes: numberEnv('MAX_FILE_SIZE_BYTES', 5 * gib),
+  maxFileSizeBytes: numberEnv('MAX_FILE_SIZE_BYTES', 10 * gib),
   retentionDays: numberEnv('RETENTION_DAYS', 7),
   signedUrlTtlSeconds: numberEnv('SIGNED_URL_TTL_SECONDS', 900)
 }
