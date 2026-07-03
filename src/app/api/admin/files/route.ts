@@ -1,4 +1,5 @@
 import { jsonError, requireAdmin } from '@/lib/auth'
+import { displayFirstName } from '@/lib/display'
 import { markExpiredFiles } from '@/lib/files'
 import { prisma } from '@/lib/prisma'
 import { FileStatus } from '@prisma/client'
@@ -10,7 +11,7 @@ export async function GET() {
 
     const files = await prisma.file.findMany({
       where: { deletedAt: null, status: { not: FileStatus.DELETED } },
-      include: { owner: { select: { email: true } } },
+      include: { owner: { select: { email: true, firstName: true } } },
       orderBy: { createdAt: 'desc' }
     })
 
@@ -23,7 +24,7 @@ export async function GET() {
         status: file.status,
         createdAt: file.createdAt.toISOString(),
         expiresAt: file.expiresAt.toISOString(),
-        ownerEmail: file.owner.email
+        ownerName: displayFirstName(file.owner)
       }))
     })
   } catch (error) {

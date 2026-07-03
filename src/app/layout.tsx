@@ -1,6 +1,8 @@
 import { ClerkProvider } from '@clerk/nextjs'
+import { currentUser } from '@clerk/nextjs/server'
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { adminEmail } from '@/lib/config'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -8,7 +10,11 @@ export const metadata: Metadata = {
   description: 'Private temporary file transfer for trusted users'
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const user = await currentUser()
+  const email = user?.primaryEmailAddress?.emailAddress?.toLowerCase()
+  const isAdmin = Boolean(adminEmail && email === adminEmail)
+
   return (
     <ClerkProvider>
       <html lang="en">
@@ -25,9 +31,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <Link href="/files" className="rounded-md px-2 py-1 hover:bg-sky/60 hover:text-moss">
                   Files
                 </Link>
-                <Link href="/admin/storage" className="rounded-md px-2 py-1 hover:bg-lilac/60 hover:text-moss">
-                  Admin
-                </Link>
+                {isAdmin ? (
+                  <Link href="/admin/storage" className="rounded-md px-2 py-1 hover:bg-lilac/60 hover:text-moss">
+                    Admin
+                  </Link>
+                ) : null}
               </nav>
             </div>
           </header>

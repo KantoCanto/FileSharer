@@ -1,4 +1,5 @@
 import { canAccessFile, getCurrentAppUser, jsonError } from '@/lib/auth'
+import { displayFirstName } from '@/lib/display'
 import { markExpiredFiles } from '@/lib/files'
 import { prisma } from '@/lib/prisma'
 import { FileStatus, Role } from '@prisma/client'
@@ -17,7 +18,7 @@ export async function GET(request: Request) {
 
     const files = await prisma.file.findMany({
       where,
-      include: { owner: { select: { email: true } } },
+      include: { owner: { select: { email: true, firstName: true } } },
       orderBy: { createdAt: 'desc' }
     })
 
@@ -33,7 +34,7 @@ export async function GET(request: Request) {
           createdAt: file.createdAt.toISOString(),
           uploadedAt: file.uploadedAt?.toISOString() ?? null,
           expiresAt: file.expiresAt.toISOString(),
-          ownerEmail: file.owner.email
+          ownerName: displayFirstName(file.owner)
         }))
     })
   } catch (error) {

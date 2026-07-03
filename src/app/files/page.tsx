@@ -1,5 +1,6 @@
 import { FileListItem, FileTable } from '@/components/FileTable'
 import { getCurrentAppUser } from '@/lib/auth'
+import { displayFirstName } from '@/lib/display'
 import { markExpiredFiles } from '@/lib/files'
 import { prisma } from '@/lib/prisma'
 import { FileStatus, Role } from '@prisma/client'
@@ -18,7 +19,7 @@ export default async function FilesPage({
       scope === 'all'
         ? { deletedAt: null, status: { not: FileStatus.DELETED } }
         : { ownerId: user.id, deletedAt: null, status: { not: FileStatus.DELETED } },
-    include: { owner: { select: { email: true } } },
+    include: { owner: { select: { email: true, firstName: true } } },
     orderBy: { createdAt: 'desc' }
   })
 
@@ -30,7 +31,7 @@ export default async function FilesPage({
     status: file.status,
     createdAt: file.createdAt.toISOString(),
     expiresAt: file.expiresAt.toISOString(),
-    ownerEmail: file.owner.email
+    ownerName: displayFirstName(file.owner)
   }))
 
   return (

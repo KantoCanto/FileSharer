@@ -12,7 +12,7 @@ export type FileListItem = {
   status: string
   createdAt: string
   expiresAt: string
-  ownerEmail: string
+  ownerName: string
 }
 
 export function FileTable({ files }: { files: FileListItem[] }) {
@@ -142,7 +142,7 @@ export function FileTable({ files }: { files: FileListItem[] }) {
                     <p className="truncate text-xs text-ink/50">{file.relativePath}</p>
                   ) : null}
                 </td>
-                <td className="px-4 py-3 text-ink/70">{file.ownerEmail}</td>
+                <td className="px-4 py-3 text-ink/70">{file.ownerName}</td>
                 <td className="px-4 py-3">{formatBytes(file.sizeBytes)}</td>
                 <td className="px-4 py-3">{file.status.toLowerCase()}</td>
                 <td className="px-4 py-3">{new Date(file.expiresAt).toLocaleString()}</td>

@@ -28,11 +28,13 @@ export async function getCurrentAppUser() {
     create: {
       clerkUserId: clerkUser.id,
       email,
+      firstName: clerkUser.firstName || null,
       role: isAdmin ? Role.ADMIN : Role.USER,
       status: UserStatus.ACTIVE
     },
     update: {
       email,
+      firstName: clerkUser.firstName || null,
       role: isAdmin ? Role.ADMIN : undefined
     }
   })
